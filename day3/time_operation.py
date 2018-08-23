@@ -28,13 +28,22 @@ print(cur_date.isoformat())
 # strftime(fmt),根据自定义的格式化字符串，对日期进行格式化
 print(cur_date.strftime("%Y~%m~%d"))
 
-# datetime.time(hour=0, minute=0, second=0, microsecond=0, tzinfo=None, *, fold=0)
-print(datetime.time(11, 30, 20, 188))
+# datetime.time(hour=0, minute=0, second=0, microsecond=0, tzinfo=None, *, fold=0),全部为非必填参数
+# microsecond为微秒，一微秒为百万分之一秒
 print(datetime.time)
-t = datetime.time(16, 24, 15)
+
+# 得到指定的datetime.time对象
+t = datetime.time(11, 30, 20, 188)
 print(t)
+# 获取datetime.time对象的时、分、秒、微秒
 print(t.hour)
 print(t.minute)
 print(t.second)
+print(t.microsecond)
+# 得到datetime.time对象的字符串，格式为HH:MM:SS
 print(t.isoformat())
+# 根据指定格式化字符串，得到datetime.time对象的字符串表示
 print(t.strftime('%H:%M:%S'))
+
+print(datetime.datetime)
+print(datetime.datetime(2018,8,23))
