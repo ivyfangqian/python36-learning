@@ -142,7 +142,8 @@ print(list(zip(name, age, city)))
 name = ['xiaoming', 'xiaohong', 'xiaofang', 'xiaogang']
 age = [19, 20, 21]
 city = ['Beijing', 'Shanghai', 'Shenzhen', 'Hangzhou']
-print(zip(name, age, city))
+print("------------" * 5)
+print(list(zip(name, age, city)))
 
 # map：并行遍历，可接受一个function类型的参数
 print(map(None, name, age, city))
