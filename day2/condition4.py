@@ -104,16 +104,81 @@ smaller = x if x < y else y
 print(smaller)
 
 # 练习题
-# 1、用户输入一个数字，判断这个数字是否能够被3整除，如果能够被整除，则输出，xx是3的倍数，否则输出xx不是3的倍数
+# 1、用户输入一个数字，判断这个数字是否能够被3整除，
+# 如果能够被整除，则输出，xx是3的倍数，否则输出xx不是3的倍数
+# 提示：使用input(promt)函数接收用户输入
+number = input("请输入一个正整数：")
+
+# 判断是否是正整数
+if number.isdigit():
+
+    # 将接收的number字符串转为int
+    number = int(number)
+
+    # 判断是否是3的倍数
+    if number % 3 == 0:
+        print("%d是3的倍数" % number)
+    else:
+        print("%d不是3的倍数" % number)
+else:
+    print("对不起，您输入的不是正整数")
+
 # 2、根据传入的月份来输出，这个月有几天(默认2月有28天，不考虑闰年)
 
-month = 5
-days = 0
-if month in [1, 3, 5, 7, 8, 10, 12]:
-    print('%d 月有 31天' % (month))
-elif month in [4, 6, 9, 11]:
-    print('%d 月有 30天' % (month))
-elif month == 2:
-    print('%d 月有 28天' % (month))
+month = input("请输入一个月份：")
+
+# 判断是否是正整数
+if month.isdigit():
+
+    # 将month转为int类型
+    month = int(month)
+    if month in [1, 3, 5, 7, 8, 10, 12]:
+        print('%d 月有 31天' % month)
+    elif month in [4, 6, 9, 11]:
+        print('%d 月有 30天' % month)
+    elif month == 2:
+        print('%d 月有 28天' % month)
+    else:
+        print('请输入1-12之间的正整数')
 else:
-    print('输入不合法')
+    print("对不起，您输入的不是正整数")
+
+# 3.接收用户输入一个年份，判断是否是闰年
+# (判断闰年的方法是该年能被4整除并且不能被100整除，或者是可以被400整除)
+
+year = input("请输入一个年份：")
+
+if year.isdigit():
+
+    # 将year转为int类型
+    year = int(year)
+    if year % 4 == 0 and year % 100 != 0:
+        print("%d是闰年" % year)
+    elif year % 400 == 0:
+        print("%d是闰年" % year)
+    else:
+        print("%d是平年" % year)
+
+else:
+    print("请输入一个正整数")
+
+# 作业：4.某电信公司的市内通话费计算标准如下：三分钟内0.2元，
+# 			  三分钟后每增加一分钟增加0.1元，不足一分钟的按一分
+# 			  钟计算。要求编写程序，给定一个通话时间（单位：秒）
+# 			  计算出应收费金额。
+
+talk_time = input("请输入通话时间，单位为s：")
+tel_charge = 0
+if talk_time.isdigit():
+    talk_time = int(talk_time)
+    if talk_time <= 180:
+        tel_charge = 0.2
+    elif talk_time % 60 == 0:
+        tel_charge = 0.2 + (talk_time - 180) // 60 * 0.1
+    else:
+        tel_charge = 0.2 + (talk_time - 180) // 60 * 0.1 + 0.1
+
+else:
+    print("对不起，您的输入不合法")
+
+print("您的话费为%.2f元" % tel_charge)
