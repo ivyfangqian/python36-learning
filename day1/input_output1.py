@@ -64,10 +64,8 @@ print(1 + 2)
 # 输出组合结果,需要注意的是，这里1+2=是字符串
 print('1+2=', 1 + 2)
 
-# 等待用户输入raw_input(),input(),其中input()输入内容必须是一个合法的Python表达式
-# name = raw_input("请输入你的名字：")
-# print name,'你好！'
-#
+# 等待用户输入input(),input()会将输入内容全部转换为字符串
+
 # name = input("请输入你的名字：")
 # print name,'你好！'
 #
@@ -87,3 +85,4 @@ if a >= 0:
     print(a)
 else:
     print(-a)
+
