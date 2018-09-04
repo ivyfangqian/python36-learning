@@ -236,6 +236,33 @@ for i in range(1, 101):
     else:
         print(i)
 
+# 猜数字
+# 系统生成一个随机数1-1024之间的一个数，580
+# 如果，你猜的数字比580小，提示  对不起，您猜的太小了
+# 如果，你猜的数字比580大，提示  对不起，您猜的太大了
+# 如果，你猜的数字正确，提示  恭喜你猜对了，结束输入和猜谜
+import random
+
+ran_int = random.randint(1, 1024)
+print(ran_int)
+while True:
+    num = input("请输入一个1-1024之间的数字：")
+    if num.isdigit():
+        num = int(num)
+        if 0 < num < 1025:
+            if num < ran_int:
+                print("对不起，您猜的太小了")
+            elif num > ran_int:
+                print("对不起，您猜的太大了")
+            elif num == ran_int:
+                print("恭喜你猜对了")
+                break
+        else:
+            print("请输入1-1024之间的整数")
+    else:
+        print("您输入的不正确，请重新输入")
+
+
 # 1. 接收用户输入一组整数，输入负数时结束输入，输出这组数字的和：格式 - -您输入的数字之和是：10
 summary = 0
 # 循环接收一个数据
