@@ -121,7 +121,6 @@ print([1, 2, 3] + [4, 5, 6])
 # 使用*对列表中元素进行乘法
 print([1, 2, 3] * 5)
 
-
 # 列表嵌套：
 # 多维列表: [ [1, 2, 3], [4, 5, 6] ]
 # zip函数
@@ -134,6 +133,26 @@ print([1, 2, 3] * 5)
 # 1.利用列表实现数据结构--栈
 # 2.接收用户输入的数字，输入负数时结束输入。存入一个列表
 #   然后找出用户所输入的所有数字中最大的数，最小的数，再将所有数字从小到大排序输出
+nums = []
+while True:
+    number = input("请输入一个非负整数，输入负数时结束接收：")
+    if number.isdigit() or (number[0] == "-" and number[1:].isdigit()):
+        number = int(number)
+        if number >= 0:
+            nums.append(number)
+        else:
+            break
+            print("输入负数，接收结束")
+    else:
+        print("输入格式不正确")
+print(nums)
+max_num = max(nums)
+print("输入的最大值为%d" % max_num)
+min_num = min(nums)
+print("输入的最小值为%d" % min_num)
+nums.sort()
+print("从小到大排序为：", nums)
+
 # 3.调用慧测会议管理接口，需要填写一个参数sign-数字签名
 #    sign的算法如下：
 #    	用户输入的参数用，去除username参数，将其余的参数按参数名的ASCII码降序排列，
