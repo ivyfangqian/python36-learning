@@ -123,6 +123,23 @@ from copy import deepcopy
 
 dc = deepcopy(adict)
 
+# 使用字典进行字符串格式化
+template = """"<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>%(title)s</title>
+</head>
+<body>
+    <h1>%(h1)s</h1>
+    <p>%(content)s</p>
+</body>
+</html>"""
+
+data = {"title": "接口测试报告", "h1": "接口测试报告2018-09-05", "content": "报告内容"}
+report = template % data
+print(report)
+
 # dict.keys() 返回一个包含字典所有KEY的列表
 print(adict.keys())
 
@@ -131,6 +148,25 @@ print(adict.values())
 
 # dict.items() 返回一个包含所有（键，值）元祖的列表
 print(adict.items())
+
+# 循环遍历字典的几种方法
+# 方法一：
+print("----------")
+address = {"baidu": "百度", "google": "谷歌", "sogou": "搜狗"}
+for key in address:
+    print(key, address[key])
+
+# 方法二：
+for key in address.keys():
+    print(key, address[key])
+
+# 方法三：
+for value in address.values():
+    print(value)
+
+# 方法四：
+for key, value in address.items():
+    print(key, value)
 
 # 1.输入一行字符，分别统计出其中英文字母、空格、数字和其它字符的个数
 string = "To be, or not to be: that is the question:\
@@ -151,67 +187,6 @@ else:
 print(stats)
 
 # 练习：
-# 编写一组数据，记录组内每个人的语文成绩
-#     data = {
-#          'JiaNaiLiang': 60,
-#          'LiXiaoLu': 75,
-#          'TianLaoShi': 99,
-#          'MaSu': 88,
-#          'KongLingHui': 35,
-#          'LiuLaoShi': 100
-#     }
-#     a.算出平均分
-#     b.再找出学霸
-
-data = {
-    'JiaNaiLiang': 60,
-    'LiXiaoLu': 75,
-    'TianLaoShi': 99,
-    'MaSu': 88,
-    'KongLingHui': 35,
-    'LiuLaoShi': 100
-}
-
-sum_score = 0
-max_score = 0
-max_stu = ""
-
-for key in data.keys():
-    sum_score += data[key]
-    if data[key] > max_score:
-        max_score = data[key]
-        max_stu = key
-
-print
-"平均分是%f，学霸是：%s" % (float(sum_score) / len(data), max_stu)
-
-print(sum(data.values()) / len(data))
-
-print(max(data.values()))
-
-# 给定一个字符串，例如abcabcd，请你求得到该字符串中所有的长度大于等于2的子串，并统计每个字串出现的次数
-string = "abcabcd"
-
-if not isinstance(string, str):
-    print
-    "请输入一个字符串"
-else:
-    if len(string) == 0 or len(string) == 1:
-        print
-        "字符串长度小于2"
-    else:
-        sub_count = {}
-        for i in range(len(string) - 1):
-            for j in range(i + 1, len(string)):
-                sub_string = string[i:j + 1]
-                if sub_string in sub_count:
-                    sub_count[sub_string] += 1
-                else:
-                    sub_count[sub_string] = 1
-
-print(sub_count)
-
-# 练习：
 # 	1、编写一组数据，记录组内每个人的语文成绩
 # 		data = {
 # 		     'WeiYingLuo': 60,
@@ -223,7 +198,37 @@ print(sub_count)
 # 		}
 # 		a.算出平均分
 # 		b.再找出学霸
-#
+data = {
+    'WeiYingLuo': 60,
+    'FuCha': 75,
+    'FuHeng': 99,
+    'XianFei': 88,
+    'ErQing': 35,
+    'HongZhou': 100
+}
+# 方法一:
+sum_score = 0
+max_score = 0
+max_stu = ""
+
+for key in data.keys():
+    sum_score += data[key]
+    if data[key] > max_score:
+        max_score = data[key]
+        max_stu = key
+
+print("平均分是%.2f，学霸是：%s" % (float(sum_score) / len(data), max_stu))
+
+print(sum(data.values()) / len(data))
+
+print(max(data.values()))
+
+# 方法二：
+avg_score = sum(data.values()) / len(data)
+
+max_stu = sorted(data.items(), key=lambda item: item[-1], reverse=True)[0][0]
+print("平均分是%.2f，学霸是：%s" % (avg_score, max_stu))
+
 #  2、编写一组数据，记录组内每个人的语文成绩、数学成绩、英语成绩
 #  	data = {
 #  	     'WeiYingLuo': [60, 68, 45],
@@ -254,17 +259,28 @@ for name, scores in data.items():
         print(name, avg_score)
 
 # b.找出各科的最高分
-chinese = sorted(data.items(), key=lambda item: item[-1][0], reverse=True)[0][1][0]
-print(chinese)
-math_max = sorted(data.items(), key=lambda item: item[-1][1], reverse=True)[0][1][1]
-print(math_max)
-english = sorted(data.items(), key=lambda item: item[-1][2], reverse=True)[0][1][2]
-print(english)
+# scores = data.values()
+# chinese = sorted(scores, key=lambda item: item[0], reverse=True)[0][0]
+# print(chinese)
+# math_max = sorted(scores, key=lambda item: item[1], reverse=True)[0][1]
+# print(math_max)
+# english = sorted(scores, key=lambda item: item[2], reverse=True)[0][2]
+# print(english)
+chs = []
+maths = []
+ens = []
+for v in data.values():
+    chs.append(v[0])
+    maths.append(v[1])
+    ens.append(v[2])
+print("语文最大成绩为%d,数学最大成绩为%d,英语最大成绩为%d" % (max(chs), max(maths), max(ens)))
 
 # c.算出各科的平均分，再找出各科的学霸
+avg_ch = sum(chs) / len(data)
+avg_math = sum(maths) / len(data)
+avg_en = sum(ens) / len(data)
 
-
-
+print("语文平均分为%.2f,数学平均分为%.2f,英语平均分为%.2f" % (avg_ch, avg_math, avg_en))
 
 # 作业：
 # 	1.编写一组数据，记录组内每个人的语文成绩、数学成绩、英语成绩
@@ -274,7 +290,7 @@ print(english)
 #             '傅恒':{'语文':44, '数学':86, '英语':73},
 #             '娴妃':{'语文':99, '数学':95, '英语':95},
 #             '尔晴':{'语文':98, '数学':65, '英语':100},
-#             '弘昼':{'语文':77, '数学':97, '英语':65},
+#             '弘昼':{'语文':77, '数学':97, '英语':65}
 #        	}
 # 		a.找到平均分不足60分的人，
 # 		b.找出各科的最高分,平均分
@@ -286,3 +302,27 @@ print(english)
 # You can browse the catalog of 25,000 free online books at http://www.gutenberg.org/catalog/,
 # and obtain a URL to an ASCII text file. Although 90% of the texts in Project Gutenberg are in English,
 # it includes material in over 50 other languages, including Catalan, Chinese, Dutch, Finnish, French, German, Italian
+
+# 3.给定一个字符串，例如abcabcd，请你求得到该字符串中所有的长度大于等于2的子串，并统计每个字串出现的次数
+string = "abcabcd"
+
+if not isinstance(string, str):
+    print
+    "请输入一个字符串"
+else:
+    if len(string) == 0 or len(string) == 1:
+        print
+        "字符串长度小于2"
+    else:
+        sub_count = {}
+        for i in range(len(string) - 1):
+            for j in range(i + 1, len(string)):
+                sub_string = string[i:j + 1]
+                if sub_string in sub_count:
+                    sub_count[sub_string] += 1
+                else:
+                    sub_count[sub_string] = 1
+
+print(sub_count)
+
+# 按照出现的次数从高到低倒叙排序

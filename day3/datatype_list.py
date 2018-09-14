@@ -162,6 +162,27 @@ print(list(user))
 # 1.利用列表实现数据结构--栈
 # 2.接收用户输入的数字，输入负数时结束输入。存入一个列表
 #   然后找出用户所输入的所有数字中最大的数，最小的数，再将所有数字从小到大排序输出
+numbers = []
+
+while True:
+    number = input("请输入一个大于等于0的整数：")
+    if number.isdigit():
+        numbers.append(int(number))
+    elif number.startswith("-") and number[1:].isdigit():
+        break
+    else:
+        print("输入不合法")
+print(numbers)
+
+# 最大的数
+# numbers.sort(reverse=True)[0]
+
+print("最大值为：", max(numbers))
+print("最小值为：", min(numbers))
+print("所有数的和为：", sum(numbers))
+numbers.sort()
+print("从小到大排序：", numbers)
+
 # 3.调用慧测会议管理接口，需要填写一个参数sign-数字签名
 #    sign的算法如下：
 #    	用户输入的参数用，去除username参数，将其余的参数按参数名的ASCII码降序排列，
@@ -178,4 +199,4 @@ for item in data_list:
         data_list.remove(item)
         user = item.split("=")[-1]
 data_list.sort(reverse=True)
-print("user=%s%s" % (user, "&".join(data_list)))
+print("user=%s&%s" % (user, "&".join(data_list)))

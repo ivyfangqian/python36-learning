@@ -45,6 +45,20 @@ for i in range(1, 1000):
 # ...
 # 第n-2趟: n-2,n-1
 # 第n-1趟: n-1
+# 0 - -- n - 1
+nums = [49, 38, 27, 45, 13]
+n = len(nums)
+for i in range(0, n - 1):
+    # 找出i+1到n-1的最小值
+    smallest_index = i + 1
+    for j in range(i + 1, n):
+        if nums[j] < nums[smallest_index]:
+            smallest_index = j
+    # 与nums[i]比较，最小值比nums[i]小，交换
+    if nums[smallest_index] < nums[i]:
+        nums[smallest_index], nums[i] = nums[i], nums[smallest_index]
+print(nums)
+
 nums = [49, 38, 27, 45, 13]
 n = len(nums)
 for i in range(0, n - 1):
