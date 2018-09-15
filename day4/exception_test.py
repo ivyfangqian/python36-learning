@@ -53,7 +53,7 @@ def summ(a, b):
     print(a + b)
 
 
-print(summ(1, 2) + 2)
+# print(summ(1, 2) + 2)
 
 # 调试时我们关心
 # 	什么类型的错误？  分类
@@ -88,28 +88,43 @@ print(summ(1, 2) + 2)
 #                 不管用没有发生错误，都会跳转到此处
 try:
     print(5 / 0)
-    print(1)
+    print("try")
 except:
-    print(2)
+    print("except")
 
-print(3)
+print("正常执行代码")
 
-#         except：
-#             0.不写异常代表捕获一些类型的错误
-#             1.可以一次捕捉多个异常 (exception1, exception2)
-#             2.多个except：
-#                 不要求从小到大捕捉
-#             3.可以在except语句块后面加一个else，当没有错误发生时，会自动执行else语句
-#             4.e代表当前异常的实例 print可以显示错误信息  , e  or as e
-#  			  5.如果想要输出详细堆栈信息，使用import traceback traceback.print_exc()
+# except：
+#     0.不写异常代表捕获一些类型的错误
+#     1.可以一次捕捉多个异常 (exception1, exception2)
+#     2.多个except：
+#         不要求从小到大捕捉
+#     3.可以在except语句块后面加一个else，当没有错误发生时，会自动执行else语句
+#     4.e代表当前异常的实例 print可以显示错误信息  , e  or as e
+#     5.如果想要输出详细堆栈信息，使用import traceback traceback.print_exc()
+import traceback
 
+try:
+    print(a)
+    print(5 / 0)
+    print("try")
+except ZeroDivisionError as e:
+    print("zero except")
+    print(e)
+except (NameError, TypeError):
+    print("multi error")
+    print(traceback.print_exc())
+else:
+    print("else")
+finally:
+    print("finally")
 
-#         执行顺序：
+print("异常后代码")
+# 执行顺序：
 #             当我们认为某些代码可能会出错时，就可以用try来运行这段代码
 #             如果执行出错，则后续代码不会继续执行，而是直接跳转至错误处理代码，即except语句块
 #             执行完except后，如果有finally语句块，则执行finally语句块
 #             try except 语句块可以相互嵌套
-#
 
 # 练习：
 #     1.从开发的代码库中得到一组数据，表示每个文件的代码变更情况
@@ -118,7 +133,102 @@ print(3)
 #       要求：统计出每个文件的变更行数
 data = {'login.py': 'a 8 d 2 u 3', 'order.py': 'a 15 d 0 u 34', 'info.py': 'a 1 d 20 u 5'}
 
+# 方法一：
+for k, v in data.items():
+    update_list = v.split()
+    summ = 0
+    for i in update_list:
+        if i.isdigit():
+            summ += int(i)
+    print(k, "变更行数：", summ)
 
+# 方法二：
+for k, v in data.items():
+    update_list = v.split()
+    summ = 0
+    for i in update_list:
+        try:
+            summ += int(i)
+        except:
+            pass
+    print(k, "变更行数：", summ)
 
-#     2.优化练习
+# 2.优化练习
 #         接受用户输入的一个字符串，如果是正整数就判断是否能同时被3和7整除
+# 方法一
+num = input("请输入一个正整数：")
+if num.isdigit():
+    num = int(num)
+    if num > 0:
+        if num % 3 == 0 and num % 7 == 0:
+            print("%d可以被3和7整除" % num)
+        else:
+            print("%d不可以被3和7整除" % num)
+    else:
+        print("非正整数")
+else:
+    print("非数字格式")
+
+# 方法二：
+num = input("请输入一个正整数：")
+try:
+    num = int(num)
+    if num > 0:
+        if num % 3 == 0 and num % 7 == 0:
+            print("%d可以被3和7整除" % num)
+        else:
+            print("%d不可以被3和7整除" % num)
+    else:
+        print("非正整数")
+except ValueError:
+    print("非数字格式")
+
+
+# 抛出
+#     如果错误没有被捕获，它就会一直往上抛，最后被Python解释器捕获，打印一个错误信息，然后程序退出
+#     raise 异常类名 (错误信息)
+#
+#     自定义异常
+#         创建类，继承相应系统异常即可
+#             选择性重写 __init__ 和  __str__
+
+# raise TypeError("抛出新异常")
+
+def summ(a, b):
+    if a == 0 or b == 0:
+        try:
+            raise BaseException("a，b不能为0")
+        except:
+            return None
+    else:
+        return a + b
+
+
+# 练习：
+# 1.
+# 编写一个计算减法的方法，当第一个数小于第二个数时，抛出“被减数不能小于减数
+# "的异常
+def sub(a, b):
+    if a < b:
+        raise ArithmeticError("被减数不能小于减数")
+    else:
+        return a - b
+
+
+# 2.
+# 编写一个计算加法的方法，接收键盘输入的两个数字，进行加法运算，当输入的有非数字时，通过异常处理机制使程序正常运行(返回0)
+def summary():
+    num1 = input("第一个数：")
+    num2 = input("第二个数：")
+    res = 0
+    try:
+        res = int(num1) + int(num2)
+    except:
+        pass
+    return res
+
+# 作业：3.
+# 创建一个用户注册服务（server），其中有一个register方法。当用户名小于6位时，抛出自定义异常
+# 系统异常NameError的子类UserNameError，显示错误信息：用户名不能小于6位
+
+

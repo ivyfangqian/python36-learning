@@ -117,35 +117,34 @@ and obtain a URL to an ASCII text file. Although 90% of the texts in Project Gut
 it includes material in over 50 other languages, including Catalan, Chinese, Dutch, Finnish, French, German, Italian"""
 
 counts = {}
-str_list = string.split()
+str_list = string.lower().split()
 print(str_list)
 for i in str_list:
     if i.endswith(",") or i.endswith("."):
-        i = i[:-1].lower()
+        i = i[:-1]
     if i in counts and i:
         counts[i] += 1
     else:
         counts[i] = 1
 print(counts)
 
+print(sorted(counts.items(), key=lambda item: item[-1], reverse=True)[0:5])
+
 # 3.给定一个字符串，例如abcabcd，请你求得到该字符串中所有的长度大于等于2的子串，并统计每个字串出现的次数
 string = "abcabcd"
 
-if not isinstance(string, str):
-    print("请输入一个字符串")
-else:
-    if len(string) == 0 or len(string) == 1:
-        print("字符串长度小于2")
+if len(string) == 0 or len(string) == 1:
+    print("字符串长度小于2")
 
-    else:
-        sub_count = {}
-        for i in range(len(string) - 1):
-            for j in range(i + 1, len(string)):
-                sub_string = string[i:j + 1]
-                if sub_string in sub_count:
-                    sub_count[sub_string] += 1
-                else:
-                    sub_count[sub_string] = 1
+else:
+    sub_count = {}
+    for i in range(len(string) - 1):
+        for j in range(i + 1, len(string)):
+            sub_string = string[i:j + 1]
+            if sub_string in sub_count:
+                sub_count[sub_string] += 1
+            else:
+                sub_count[sub_string] = 1
 
 print(sub_count)
 

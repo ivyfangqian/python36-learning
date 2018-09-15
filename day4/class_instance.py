@@ -280,7 +280,6 @@ print(sta)
 if __name__ == '__main__':
     print("如果我这个py文件被直接运行，这行才会被打印")
 
-
 # 面向对象的四个特点：封装，抽象，继承，多态
 # 封装：对数据的封装--》列表，元组，字典
 #       对脚本语句的封装--》函数
@@ -315,29 +314,63 @@ print(subList)
 subList.sort()
 print(subList)
 
+# 继承和多态
+# 		继承 -- 复用
+# 			方法覆盖(重写)
+# 			多态--对扩展开放，对修改关闭
+# 				1.当我们需要传入一个对象时，我们可以不传入具体的类型，而传入一个抽象的概念---父类对象
+# 				2.这样，在程序实际运行时，可以动态绑定传入的类型
+# 			    3.因为都有共同的父类，所以一定有共同的方法。使用时，内部使用时，调用共有的方法就可以
+# 				  isinstance(instance, class)方法
+# 			多重继承
+#   				(class1, class2, class3)  --class1优先
 
-# 多态
-# 如果子类中有属性或者方法与父类属性、方法名字一致，
-# 会覆盖父类的属性和方法
-class A(object):
-    name = 'A'
 
-    def fun(self):
-        print
-        'A'
+class Animal(object):
+    def run(self):
+        print("animal run...")
+
+    def eat(self):
+        print("animal eat...")
 
 
-class B(A):
-    pass
-    # # 子类属性覆盖父类方法
-    # name = 'B'
-    #
-    # # 子类方法覆盖父类方法
-    # def fun(self):
-    #     print 'B'
+class Cat(Animal):
+    def run(self):
+        print("cat run...")
 
-# a = A()
-# a.fun()
+    def eat(self):
+        print("cat eat...")
+
+
+class Dog(Animal):
+    def run(self):
+        print("dog run...")
+
+    def eat(self):
+        print("dog eat...")
+
+
+class Person(object):
+    def __init__(self, name):
+        self.name = name
+
+    def feed(self, animal):
+        animal.eat()
+
+# 作业：
+#     设计一个部门类Department，属性为部门名称（name）
+#     需求：
+#         1.直接通过Department调用get_all方法，返回公司员工总数
+#         2.通过部门实例，调用方法get_count方法，返回部门员工数
+#         3.通过部门实例，调用方法get_employees()，显示该部门所有员工信息
+#           格式为： 工号-xxx ，姓名-xxx ，手机号-xxx，工资-xxx
+#         提示：有人入职，员工数就要增加，部门存入员工对象
 #
-# b = B()
-# b.fun()
+#     设计一个员工类Employee，员工属性有姓名（name）、手机号(phone)、工资(salary)、所属部门。
+#     需求：
+#     1.新员工入职时，分配一个不重复的工号。从1开始排列，已离职员工工号作废。
+#     2.员工本人可以调用get_salary方法查询自己的工资
+#     3.员工本人可以调用get_info方法查询自己的全部信息--字典形式
+#
+#     测试：人力资源部（小红）、技术部（田老师、刘老师）
+#           输出 每个部门的人员和公司总人数，输出两个部门的人员信息
