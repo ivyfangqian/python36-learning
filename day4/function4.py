@@ -335,7 +335,7 @@ print(res)
 # 	若传入参数的长度不等，则返回list的长度和参数中长度最短的对象相同
 # 练习：用zip函数组合出
 # 	((1, 'zhangsan', 3000), (2, 'lisi', 2500), (3, 'tiantian', 20000))
-ids = [1, 2, 3, 4]
+ids = [1, 2, 3]
 names = ["zhangsan", "lisi", "wangwu"]
 salary = [3000, 2500, 20000]
 print(zip(ids, names, salary))
@@ -396,9 +396,7 @@ print(prod(a=1, b=2, c=3, d=4))
 # 	将day2作业中的选择排序题封装成函数
 def selection_sort(seq=None):
     if seq is None:
-        return
-    if len(seq) == 1 or len(seq) == 0:
-        return
+        raise ValueError("列表不能为空")
     n = len(seq)
     for i in range(0, n - 1):
         # 找出i+1到n-1的最小值
@@ -414,4 +412,3 @@ def selection_sort(seq=None):
 nums = [49, 38, 27, 45, 13]
 print(selection_sort(nums))
 print(nums)
-

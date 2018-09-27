@@ -1,27 +1,27 @@
-# # 作业：4.某电信公司的市内通话费计算标准如下：三分钟内0.2元，
-# # 			  三分钟后每增加一分钟增加0.1元，不足一分钟的按一分
-# # 			  钟计算。要求编写程序，给定一个通话时间（单位：秒）
-# # 			  计算出应收费金额。
-#
-# talk_time = input("请输入通话时长:")
-# talk_charge = 0.0
-#
-# if talk_time.isdigit():
-#     talk_time = int(talk_time)
-#     if 0 < talk_time <= 180:
-#         talk_charge = 0.2
-#         print("通话时长%d,通话费用%.2f" % (talk_time, talk_charge))
-#     elif talk_time > 180 and talk_time % 60 == 0:
-#         talk_charge = 0.2 + (talk_time - 180) // 60 * 0.1
-#         print("通话时长%d,通话费用%.2f" % (talk_time, talk_charge))
-#     elif talk_time > 180 and talk_time % 60 != 0:
-#         talk_charge = 0.2 + (talk_time - 180) // 60 * 0.1 + 0.1
-#         print("通话时长%d,通话费用%.2f" % (talk_time, talk_charge))
-#     else:
-#         print("通话时长不能为0")
-#
-# else:
-#     print("对不起，输入的通话时长格式不合法")
+# 作业：4.某电信公司的市内通话费计算标准如下：三分钟内0.2元，
+# 			  三分钟后每增加一分钟增加0.1元，不足一分钟的按一分
+# 			  钟计算。要求编写程序，给定一个通话时间（单位：秒）
+# 			  计算出应收费金额。
+
+talk_time = input("请输入通话时长:")
+talk_charge = 0.0
+
+if talk_time.isdigit():
+    talk_time = int(talk_time)
+    if 0 < talk_time <= 180:
+        talk_charge = 0.2
+        print("通话时长%d,通话费用%.2f" % (talk_time, talk_charge))
+    elif talk_time > 180 and talk_time % 60 == 0:
+        talk_charge = 0.2 + (talk_time - 180) // 60 * 0.1
+        print("通话时长%d,通话费用%.2f" % (talk_time, talk_charge))
+    elif talk_time > 180 and talk_time % 60 != 0:
+        talk_charge = 0.2 + (talk_time - 180) // 60 * 0.1 + 0.1
+        print("通话时长%d,通话费用%.2f" % (talk_time, talk_charge))
+    else:
+        print("通话时长不能为0")
+
+else:
+    print("对不起，输入的通话时长格式不合法")
 
 # 作业：
 # 1.某市的出租车计费标准为：3公里以内13元，3公里以后每0.5公里加收1元；每等待2.
@@ -59,23 +59,23 @@ print("公里数为%.2f,等待时间为%d,总的车费为%.2f" % (km, wait_time,
 # 5 - - 1
 # 6 - -1, 2, 3 - - 2, 3, 4, 5
 # 8 - - 1, 2, 4 - - 2, 3, 4, 5, 6, 7
+# 方法一
+for i in range(1, 1001):
+    summary = 0
+    for j in range(2, i):
+        if i % j == 0:
+            summary += j
+    if summary+1 == i:
+        print(i)
 
-# for i in range(1, 1001):
-#     summary = 0
-#     for j in range(2, i):
-#         if i % j == 0:
-#             summary += j
-#     if summary+1 == i:
-#         print(i)
-
-
-# for i in range(1, 1001):
-#     items = [1]
-#     for j in range(2, i):
-#         if i % j == 0:
-#             items.append(j)
-#     if sum(items) == i:
-#         print(i, items)
+# 方法二
+for i in range(1, 1001):
+    items = [1]
+    for j in range(2, i):
+        if i % j == 0:
+            items.append(j)
+    if sum(items) == i:
+        print(i, items)
 
 # 5.员工工资表，查询结果集如下：
 # ((1, 'zhangsan', 3000), (2, 'lisi', 2500), (3, 'tiantian', 20000))

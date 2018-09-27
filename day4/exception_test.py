@@ -230,5 +230,3 @@ def summary():
 # 作业：3.
 # 创建一个用户注册服务（server），其中有一个register方法。当用户名小于6位时，抛出自定义异常
 # 系统异常NameError的子类UserNameError，显示错误信息：用户名不能小于6位
-
-
