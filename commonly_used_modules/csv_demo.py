@@ -24,6 +24,8 @@ for row in csv_f:
     print(row["id"])
     print(row["name"])
 
+
+# ----------------------------以下是csv写入代码----------------------------------------
 # csv文件写入
 headers = ["id", "name", "age", "height"]
 content = [(1, "小明", 18, 175),
